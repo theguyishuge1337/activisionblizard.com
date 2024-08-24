@@ -1,6 +1,1320 @@
 
-HomeHTMLHTML IntroductionTryit: HTML introduction
-Result Size: 945 x 864
+
+     
+
+    
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+
+	
+
+
+    
+	
+
+  <head>
+
+	
+	
+
+	<script>
+
+        var curUrl = window.location.href;
+		var isPrevOrStage = window.location.host.includes("stage") || window.location.host.includes("preview") || window.location.host.includes("test");
+        var domain = isPrevOrStage ? "s-dev" : "s";
+        var siteId, fetchUrl;
+
+        if(curUrl.includes("callofduty.com") > 0) {
+            siteId = "cod";
+            fetchUrl = "https://profile.callofduty.com"
+        }
+        else if(curUrl.includes("crashbandicoot.com") > 0) {
+			siteId = "crash";
+            fetchUrl = "https://" + domain + ".crashbandicoot.com";
+        }
+        else if(curUrl.includes("tonyhawkthegame.com") > 0) {
+            siteId = "th";
+            fetchUrl = "https://" + domain + ".tonyhawkthegame.com";
+        }
+        else if(curUrl.includes("sekirothegame.com") > 0) {
+            siteId = "sekiro";
+            fetchUrl = "https://" + domain + ".sekirothegame.com";
+        }
+        else if(curUrl.includes("activision.com") > 0) {
+            siteId = "activision";
+            fetchUrl = "https://" + domain + ".activision.com";
+        }
+
+		var OneTrust = {
+				dataSubjectParams: {
+					id: "",
+					isAnonymous: false,
+					token : ""
+				}
+			};		
+			function otGetCookie (cookieName) {
+				var i = 0,
+					cookies = document.cookie.split(";"),
+					length = cookies.length,
+					trimRegex = /^\s+|\s+$/g,
+					cookiePair;
+
+				for (; i < length; i++) {
+					cookiePair = cookies[i].split('=');				
+					if (cookiePair[0].replace(trimRegex, '') === cookieName) return unescape(cookiePair[1]);
+				}
+			}
+			var loggedIn = otGetCookie("ACT_SSO_COOKIE") || otGetCookie("s_ACT_SSO_COOKIE") || false;
+			if(loggedIn) {
+
+				var xsrfToken = otGetCookie("XSRF-TOKEN");
+				var ssoCookieValue = otGetCookie("ACT_SSO_COOKIE");
+    			var headers = {
+        			'Cookie': "ACT_SSO_COOKIE=" + ssoCookieValue,
+					'X-XSRF-TOKEN': xsrfToken
+    			}
+
+				fetch(fetchUrl + "/" + siteId + "/regulations/onetrust/auth", {
+					method: "POST",
+            		credentials: 'include',
+            		mode: 'cors',
+					headers: headers
+				})
+				.then((response) => response.json())
+				.then((json) => { 
+					OneTrust = {
+						dataSubjectParams: {
+							id: json.userId,
+							isAnonymous: false,
+							token : json.token
+						}
+					};
+					console.log("OneTrust: ",OneTrust);
+				})
+        		.catch(error => {
+                    // Handle errors
+                    console.error('Fetch error:', error); 
+                });
+			}
+			window.addEventListener("OneTrustGroupsUpdated", handleOneTrustGroupsUpdated);
+		    function handleOneTrustGroupsUpdated() {
+				if(loggedIn) {
+        			var xsrfToken = otGetCookie("XSRF-TOKEN");
+                    var ssoCookieValue = otGetCookie("ACT_SSO_COOKIE");
+                    var headers = {
+            			'Cookie': "ACT_SSO_COOKIE=" + ssoCookieValue,
+                        'X-XSRF-TOKEN': xsrfToken
+                    };
+					fetch(fetchUrl + "/" + siteId + "/regulations/onetrust/preferences?activeGroups=" + OnetrustActiveGroups, {
+							method: "POST",
+							credentials: 'include',
+                			mode: 'cors',
+							headers: headers
+					})
+            		.catch(error => {
+                        // Handle errors
+                        console.error('Fetch error:', error);
+                    });
+
+				}
+			}
+
+	</script>
+
+
+
+    <meta charset="UTF-8"/>
+
+    <meta name="country" content="US"/>
+
+	
+    
+
+         <script>var dataLayer = dataLayer || [],
+    	         digitalData = {"page":{"pageInfo":{"charSet":"UTF-8","language":"EN","country":"US","site":"activisionblizzard","pageName":"activisionblizzard:ab:en:home","siteSection":"ab","siteSubsection":"home"},"pageCategory":{"primaryCategory":"ab","pageType":"home","subCategory1":"en"},"targetEntity":{"locale":"en_US","brand":"activisionblizzard","categoryId":"['ab', 'ab:en', 'activisionblizzard:ab:en:home']","pageURL":"https://www.activisionblizzard.com/content/atvi/activisionblizzard/ab-touchui/ab/web/en/home.html","id":"home","name":"Activision Blizzard | Home"}}};
+    </script>
+
+    
+    
+
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	
+
+
+    
+    
+
+     
+     
+    <base href="https://www.activisionblizzard.com"/> 
+
+
+
+	
+    
+
+    
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;j.addEventListener('load', function() { var _ge = new CustomEvent('gtm_loaded', { bubbles: true });                                                                                                                                                                           d.dispatchEvent(_ge);});f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K9BCZ6V');</script>
+    
+
+
+    
+    
+
+     <title>Activision Blizzard | Home</title>
+
+
+    
+    
+
+    <meta name="template" content="activision-blizzard-standard-template"/>
+    
+
+
+
+    
+    
+
+    
+
+
+	
+
+    
+        
+       	
+    
+
+	<link rel="image_src" href="https://www.activisionblizzard.com/content/dam/atvi/activisionblizzard/ab-touchui/common/activision-blizzard-share.png"/>
+
+    <meta property="og:title" content="Activision Blizzard | Home"/>
+    
+	
+	
+	<meta property="og:type" content="website"/>
+
+    <meta property="og:image" content="https://www.activisionblizzard.com/content/dam/atvi/activisionblizzard/ab-touchui/common/activision-blizzard-share.png"/>
+    <meta property="og:image:url" content="https://www.activisionblizzard.com/content/dam/atvi/activisionblizzard/ab-touchui/common/activision-blizzard-share.png"/>
+    <meta property="og:image:secure_url" content="https://www.activisionblizzard.com/content/dam/atvi/activisionblizzard/ab-touchui/common/activision-blizzard-share.png"/>
+
+    <meta name="twitter:title" content="Activision Blizzard | Home"/>
+    
+	
+    <meta name="twitter:image" content="https://www.activisionblizzard.com/content/dam/atvi/activisionblizzard/ab-touchui/common/activision-blizzard-share.png"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+	<meta name="twitter:site"/>
+    
+
+    <!-- END SHARE META TAGS -->
+
+
+    
+    
+		
+
+
+   
+
+	
+
+    <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "VideoGame",
+          "author": {
+                "@type": "Organization", 
+                "name": [""]
+          },
+          "contentRating": "",
+          "datePublished": "",
+          "description": "",
+          "gamePlatform": [],
+          "genre": [],
+          "image": "",
+          "name": "",
+	      "contentLocation": [],
+		  "playMode": [],
+		  "isAccessibleForFree": "False",
+          "inLanguage": [
+                {
+                    "@type": "Language",
+                    "name": "English"
+                }
+            ],
+            "thumbnailUrl": "",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Activision Publishing",
+                "sameAs": [
+                    "http://www.activision.com",
+                    "https://www.youtube.com/user/ActivisionGames",
+                    "http://en.wikipedia.org/wiki/Activision"
+                ]
+
+            },        
+            "applicationCategory": "Game",
+            "operatingSystem": [],
+            "url": "",
+            "isPartOf": {
+                "@type":"VideoGameSeries",
+                "name":""
+            }
+        }
+
+    	</script>
+
+    
+    <!-- END SCHEMA TAGS -->
+
+    
+    
+    
+
+	<script> 
+        var ATVI = ATVI || {},
+			wcmmode;
+		if (false) wcmmode = 'edit';
+		if (false) wcmmode = 'design';
+		if (!false && !false) wcmmode = '';
+		ATVI.pageMode = wcmmode;
+		ATVI.pageEnv = ('www.activisionblizzard.com'.indexOf('cmsauthor') > -1) ? 'dev' : 'prod';
+		ATVI.pageLocale = 'en';
+	</script>
+
+
+
+    
+    
+
+   
+
+   
+
+
+
+    
+    
+
+    
+
+	
+
+    
+
+	
+
+    
+
+    
+
+    
+    
+<link rel="stylesheet" href="/apps/atvi/global/clientlibs.3bf3f28740b0f13f93c845b52b11a008.css" type="text/css"><script type="text/javascript" src="/apps/atvi/global/clientlibs.f70403069111891244d0d542fc4df0bf.js"></script>
+
+
+
+    
+        
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/clientlibs/common/core.308f5e47861b701f1a1c6c6ac4629010.css" type="text/css"><link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/content/home/clientlibs.dac6bab4db08bff7b048f5d2aad0daf5.css" type="text/css"><script type="text/javascript" src="/apps/atvi/activision-blizzard/ab-touchui/clientlibs/common/core.d261b7e363d4e87c573ca0d1e5c61d63.js" defer></script><script type="text/javascript" src="/apps/atvi/activision-blizzard/ab-touchui/components/content/home/clientlibs.ccfab583f6c7bd69d9c34c4de1da9c48.js" defer></script>
+
+
+    
+
+    
+
+
+
+
+	
+    
+	
+	
+	
+	
+	
+        
+        
+            <link rel="alternate" hreflang="en" href="https://www.activisionblizzard.com"/>
+        
+        
+    
+
+	
+    
+    <link rel="canonical" href="https://www.activisionblizzard.com"/>
+
+  
+
+
+    
+    
+    
+    
+    <link rel="icon" href="/content/dam/atvi/global/favicon/favicon.ico"/>
+	<link rel="icon" type="image/vnd.microsoft.icon" href="/content/dam/atvi/global/favicon/favicon.ico"/>
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/content/dam/atvi/global/favicon/favicon.ico"/>
+
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=100"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<link rel="apple-touch-icon" href="https://www.activision.com/content/dam/atvi/global/apple-touch-icon.png"/>
+	<meta name="robots" content="max-image-preview:large"/>
+
+    
+	
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+    
+    
+        
+    
+
+    
+    
+<link rel="stylesheet" href="/libs/wcm/foundation/components/page/responsive.6b768e2136fcc283bddfd16e964001ab.css" type="text/css">
+
+
+
+    
+
+    <!--adobe launch header scripts-->
+        
+
+    <!--end adobe launch scripts-->
+
+
+	
+	
+
+	
+
+
+  </head>
+
+
+	
+    
+
+
+<body>
+
+
+		
+		
+
+    
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9BCZ6V" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+	
+
+
+
+        
+        
+	
+
+
+    
+
+        
+        <div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="ab-header aem-GridColumn aem-GridColumn--default--12">
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/structure/ab-header/clientlibs.83041661744ddf1042f7a80859163053.css" type="text/css">
+<script src="/apps/atvi/activision-blizzard/ab-touchui/components/structure/ab-header/clientlibs.5ff035c191a80178e18dc72c4a2af029.js"></script>
+
+
+ 
+
+
+
+ 
+
+
+
+  <section class="ab-header-container">
+
+    <div class="desktop-header">
+      <div class="header-wrapper content-container">
+        
+        <a href="https://www.activisionblizzard.com" class="header-logo" style="background-image: url(/content/dam/atvi/activisionblizzard/ab/common/logos/activision-blizzard-logo-white.png)" title="Activision Blizzard" alt="Activision Blizzard"></a>
+        <div class="header-nav">
+          <div class="header-item about">
+            <div class="header-nav-item">
+              <a class="header-nav-txt" href="https://www.activisionblizzard.com/about-us">About</a>
+            </div>
+            <ul class="header-nav-list">
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/who-we-are">Who We Are</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/games">Our Iconic Franchises</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/diversity-inclusion">Diversity, Equity &amp; Inclusion</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/location">Locations</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/code-of-conduct/launch">Code of Conduct</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/contact-us">Contact</a></li>
+            </ul>
+          </div>
+          <div class="header-item careers">
+            <div class="header-nav-item">
+              <a class="header-nav-txt" href="https://careers.activisionblizzard.com" target="_blank">Careers</a>
+            </div>
+            <ul class="header-nav-list">
+              <li><a class="header-nav-link" href="https://careers.activisionblizzard.com/">Search Jobs</a></li>
+            
+              <li><a class="header-nav-link" href="https://careers.activisionblizzard.com/veterans">Veterans</a></li>
+            
+              <li><a class="header-nav-link" href="https://careers.activisionblizzard.com/early-careers">Students</a></li>
+            
+              <li><a class="header-nav-link" href="https://hub.activisionblizzard.com/s/us-benefits">Benefits</a></li>
+            </ul>
+          </div>
+          <div class="header-item investor">
+            <div class="header-nav-item">
+              <a class="header-nav-txt" href="https://investor.activision.com/" target="_blank">Investor Relations</a>
+            </div>
+			
+          </div>
+          <div class="header-item social">
+            <div class="header-nav-item">
+              <a class="header-nav-txt" href="https://ourcommitments.activisionblizzard.com">Our Commitments</a>
+            </div>
+            <ul class="header-nav-list">
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/endowment">The Endowment</a></li>
+            
+              <li><a class="header-nav-link" href="https://ourcommitments.activisionblizzard.com/esgreports">ESG Reports</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/corporate-governance">Corporate Governance</a></li>
+            </ul>
+          </div>
+          <div class="header-item news">
+            <div class="header-nav-item">
+              <a class="header-nav-txt" href="https://www.activisionblizzard.com/newsroom">Newsroom</a>
+            </div>
+            <ul class="header-nav-list">
+              <li><a class="header-nav-link" href="https://investor.activision.com/press-releases">Press Releases</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/media-contacts">Media Contacts</a></li>
+            
+              <li><a class="header-nav-link" href="https://www.activisionblizzard.com/annual-reports">Annual Reports</a></li>
+            </ul>
+          </div>
+          <div class="search-nav-bar">
+            <input type="text" name="search-bar" class="search-bar" placeholder="What are you looking for?"/>
+          </div>
+          <div class="search-nav-icon"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-header">
+      <div class="mobile-logo-container">
+        <a href="https://www.activisionblizzard.com" class="header-logo" style="background-image: url(/content/dam/atvi/activisionblizzard/ab/common/logos/activision-blizzard-logo-white.png)" title="Activision Blizzard" alt="Activision Blizzard"></a>
+      </div>
+        <div class="search-nav-bar">
+          <input type="text" name="search-bar" class="search-bar" placeholder="What are you looking for?"/>
+        </div>
+      <div class="search-nav-icon"></div>
+      <div class="mobile-menu-container">
+        <div class="mobile-menu">
+          <div class="bar-1"></div>
+          <div class="bar-2"></div>
+          <div class="bar-3"></div>
+        </div>
+        <ul class="mobile-navigation" id="sideNav">
+          <li class="mobile-dropdown mult" id="About">
+            <a href="#" class="dropdown-header">About</a>
+            <div class="dropdown-content">
+                <a class="header-nav-link" href="https://www.activisionblizzard.com/about-us">About Us</a>
+                
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/who-we-are">Who We Are</a>
+              	
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/games">Our Iconic Franchises</a>
+              	
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/diversity-inclusion">Diversity, Equity &amp; Inclusion</a>
+              	
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/location">Locations</a>
+              	
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/code-of-conduct/launch">Code of Conduct</a>
+              	
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/contact-us">Contact</a>
+              	
+            </div>
+          </li>
+          <li class="mobile-dropdown" id="Careers">
+            <a href="https://careers.activisionblizzard.com">Careers</a>
+            
+          </li>
+          <li class="mobile-dropdown mult" id="Investor">
+            <a href="#" class="dropdown-header">Investor Relations</a>
+            
+            <div class="dropdown-content">
+                <a class="header-nav-link" href="https://investor.activision.com/" aria-label="Investor Relations">Investor Relations Main</a>
+                <a class="header-nav-link" href="https://investor.activision.com/#ir-reports-filings" aria-label="Reports & Filings">Reports & Filings</a>
+				<a class="header-nav-link" href="https://investor.activision.com/press-releases" aria-label="Press Releases">Press Releases</a>
+                <a class="header-nav-link" href="https://investor.activision.com/#ir-events-presentations" aria-label="Events & Presentations">Events & Presentations</a>
+                <a class="header-nav-link" href="https://investor.activision.com/#ir-content" aria-label="Stock Performance">Stock Performance</a>
+                <a class="header-nav-link" href="https://investor.activision.com/#ir-corporate-governance" aria-label="Corporate Governance">Corporate Governance</a>
+                <a class="header-nav-link" href="https://investor.activision.com/dividend-faq" aria-label="Dividend FAQ">Dividend FAQ</a>
+                <a class="header-nav-link" href="https://investor.activision.com/email-alerts" aria-label="Email Alerts Subscription">Email Alerts Subscription</a>
+
+            </div>
+          </li>
+          <li class="mobile-dropdown mult" id="Social">
+            <a href="#" class="dropdown-header">Our Commitments</a>
+            <div class="dropdown-content">
+                <a class="header-nav-link" href="https://ourcommitments.activisionblizzard.com">Our Commitments</a>
+                
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/endowment">The Endowment</a>
+              	
+              		<a class="header-nav-link" href="https://ourcommitments.activisionblizzard.com/esgreports">ESG Reports</a>
+              	
+              		<a class="header-nav-link" href="https://www.activisionblizzard.com/corporate-governance">Corporate Governance</a>
+              	
+            </div>
+          </li>
+          <li class="mobile-dropdown mult" id="News">
+            <a href="#" class="dropdown-header">Newsroom</a>
+            <div class="dropdown-content">
+                <a href="https://www.activisionblizzard.com/newsroom" class="header-nav-link">Newsroom</a>
+                
+                  <a class="header-nav-link" href="https://investor.activision.com/press-releases">Press Releases</a>
+                  <a class="header-nav-link" href="https://www.activisionblizzard.com/media-contacts">Media Contacts</a>
+                  <a class="header-nav-link" href="https://www.activisionblizzard.com/annual-reports">Annual Reports</a></li>
+                
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="home-hero aem-GridColumn aem-GridColumn--default--12">
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/content/home/home-hero/clientlibs.06b6b0011bad26486ee3e4e5304f4aee.css" type="text/css">
+<script src="/apps/atvi/activision-blizzard/ab-touchui/components/content/home/home-hero/clientlibs.eb376da0b67030f31e49ae0a56b01bab.js"></script>
+
+
+
+
+
+     
+
+
+
+
+
+
+
+  <section class="home-hero-container">
+    <div class="hero">
+      <div class="hero-wrapper">
+        
+            <div class="hero-item isVideo">
+              <div class="hero-container">
+                <div class="hero-content-container">
+                  <div class="hero-content">
+                    
+                    <div class="hero-content-subheadline">
+                    	<div class="subheadline"></div>
+                    	<a class="links" href="https://www.callofduty.com/" target="_blank">About Call of Duty</a>
+                    </div>
+                  </div>
+    
+                    
+                        <div class="hero-item-esrb"><img src="https://imgs.callofduty.com/content/dam/atvi/global/ratings/esrb/cod-hub-esrb-en.png" alt="ESRB"/></div>
+                    
+                  <div class="side-content-container">Call of Duty®</div>
+                </div>
+              </div>
+              
+                <video class="hero-bg-video desktop" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_cod.mp4" type="video/mp4"/>
+                </video>
+                <video class="hero-bg-video mobile" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_cod-mobile.mp4" type="video/mp4"/>
+                </video>
+              
+              
+            </div>
+        
+            <div class="hero-item isVideo">
+              <div class="hero-container">
+                <div class="hero-content-container">
+                  <div class="hero-content">
+                    
+                    <div class="hero-content-subheadline">
+                    	<div class="subheadline"></div>
+                    	<a class="links" href="https://www.crashbandicoot.com/" target="_blank">About Crash Bandicoot</a>
+                    </div>
+                  </div>
+    
+                    
+                        <div class="hero-item-esrb"><img src="/content/dam/atvi/global/ratings/esrb/1L_ENG_ESRB_E10+.png" alt="ESRB"/></div>
+                    
+                  <div class="side-content-container">Crash Bandicoot®</div>
+                </div>
+              </div>
+              
+                <video class="hero-bg-video desktop" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_crash.mp4" type="video/mp4"/>
+                </video>
+                <video class="hero-bg-video mobile" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_crash-mobile.mp4" type="video/mp4"/>
+                </video>
+              
+              
+            </div>
+        
+            <div class="hero-item isVideo">
+              <div class="hero-container">
+                <div class="hero-content-container">
+                  <div class="hero-content">
+                    
+                    <div class="hero-content-subheadline">
+                    	<div class="subheadline"></div>
+                    	<a class="links" href="https://diablo4.blizzard.com/" target="_blank">About Diablo</a>
+                    </div>
+                  </div>
+    
+                    
+                  <div class="side-content-container">Diablo®</div>
+                </div>
+              </div>
+              
+                <video class="hero-bg-video desktop" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_diablo.mp4" type="video/mp4"/>
+                </video>
+                <video class="hero-bg-video mobile" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_diablo-mobile.mp4" type="video/mp4"/>
+                </video>
+              
+              
+            </div>
+        
+            <div class="hero-item isVideo">
+              <div class="hero-container">
+                <div class="hero-content-container">
+                  <div class="hero-content">
+                    
+                    <div class="hero-content-subheadline">
+                    	<div class="subheadline"></div>
+                    	<a class="links" href="https://www.playoverwatch.com/en-us/" target="_blank">About Overwatch</a>
+                    </div>
+                  </div>
+    
+                    
+                        <div class="hero-item-esrb"><img src="/content/dam/atvi/global/ratings/esrb/esrb-thproHD-en.jpg" alt="ESRB"/></div>
+                    
+                  <div class="side-content-container">Overwatch®</div>
+                </div>
+              </div>
+              
+                <video class="hero-bg-video desktop" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_overwatch.mp4" type="video/mp4"/>
+                </video>
+                <video class="hero-bg-video mobile" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_overwatch-mobile.mp4" type="video/mp4"/>
+                </video>
+              
+              
+            </div>
+        
+            <div class="hero-item isVideo">
+              <div class="hero-container">
+                <div class="hero-content-container">
+                  <div class="hero-content">
+                    
+                    <div class="hero-content-subheadline">
+                    	<div class="subheadline"></div>
+                    	<a class="links" href="https://www.worldofwarcraft.com/en-us/" target="_blank">About World of Warcraft</a>
+                    </div>
+                  </div>
+    
+                    
+                        <div class="hero-item-esrb"><img src="/content/dam/atvi/global/ratings/esrb/esrb-thproHD-en.jpg" alt="ESRB"/></div>
+                    
+                  <div class="side-content-container">World of Warcraft®</div>
+                </div>
+              </div>
+              
+                <video class="hero-bg-video desktop" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_wow.mp4" type="video/mp4"/>
+                </video>
+                <video class="hero-bg-video mobile" playsinline loop muted>
+                  <source class="mp4" src="https://www.activision.com/cdn/activisionblizzard/videos/ab_wow-mobile.mp4" type="video/mp4"/>
+                </video>
+              
+              
+            </div>
+        
+      </div>
+    </div>
+    <div class="hero-nav">
+      <div class="hero-nav-container">
+        <div class="hero-nav-btns"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+</div>
+<div class="atvi-experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+
+    
+    
+		<div id="atvi_experiencefragm" class=" atvi-module-container" data-analytics-container="about-us">
+			
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="home-about-us aem-GridColumn aem-GridColumn--default--12">
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/content/home/home-about-us/clientlibs.15f438cd4c3c45475da801b9f095866d.css" type="text/css">
+<script src="/apps/atvi/activision-blizzard/ab-touchui/components/content/home/home-about-us/clientlibs.16b012b735f973fe716b6456ecde3759.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <section class="home-about-us-container">
+    <div class="about-us-wrapper">
+      <div class="bg-container mobile" style="background-image: url(/content/dam/atvi/activisionblizzard/ab-touchui/home/about-mobile-bg.png);"></div>      
+      <div class="description-container">
+        <h1 class="header">About Us</h1>
+        <div class="description"><p>We create the most epic interactive gaming and entertainment experiences. Our platforms immerse players in new, unimagined worlds and offer countless ways to play within them. We build communities that bring people together with purpose and belonging. We make every day more fun with games from Candy Crush™, Call of Duty®, and World of Warcraft® to Overwatch®, Hearthstone®, and Diablo®. There is something for everyone. It takes heroes to make heroes, and our employees, across Activision, Blizzard Entertainment, and King Digital Entertainment, are some of the best and brightest talent in all of tech, media, and entertainment. Hard work pays off, and we’re proud to have been previously named one of FORTUNE’s “100 Best Companies To Work For®” for five consecutive years.</p>
+<p> </p>
+<p> </p>
+</div>
+        <a class="links atvi-cta-item" href="/about-us">Learn More</a>
+      </div>
+      <div class="bg-container desktop" style="background-image: url(/content/dam/atvi/activisionblizzard/ab-touchui/home/about-desktop-bg.png);"></div>
+    </div>
+    <div class="about-us-icons-container">
+      <div class="icon"><a href="https://www.activision.com" target="_blank"><img class="logo" src="/content/dam/atvi/activision/atviLogo.png" alt="Activision"/></a></div>
+      <div class="icon"><a href="https://www.blizzard.com" target="_blank"><img class="logo" src="/content/dam/atvi/activisionblizzard/ab-touchui/common/blizzard-white-transparent.png" alt="Blizzard"/></a></div>
+      <div class="icon"><a href="https://www.king.com" target="_blank"><img class="logo" src="/content/dam/atvi/activisionblizzard/ab-touchui/common/king-white-transparent.png" alt="King"/></a></div>
+      <div class="icon"><a target="_blank"><img class="logo" src="/content/dam/atvi/activisionblizzard/ab-touchui/ab-esports-logos/ABE_Logo_White_1920x1080.png" title="Activision Blizzard eSport" alt="Activision Blizzard eSport"/></a></div>
+      <div class="icon"><a target="_blank"><img class="logo" src="/content/dam/atvi/activisionblizzard/ab-touchui/common/consumer-product.png" alt="Activision Blizzard Consumer Product"/></a></div>
+      <div class="icon"><a href="https://www.activisionblizzardmedia.com/" target="_blank"><img class="logo" src="/content/dam/atvi/activisionblizzard/ab-touchui/common/abm-white-transparent.png" alt="Activision Blizzard Media"/></a></div>
+    </div>
+  </section>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+		</div>
+	
+</div>
+<div class="atvi-experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+
+    
+    
+		<div id="atvi_experiencefragm_1084631920" class=" atvi-module-container" data-analytics-container="legendary-franchises">
+			
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="wwa-franchises-component aem-GridColumn aem-GridColumn--default--12">
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/content/who-we-are/wwa-franchises-component/clientlibs.eb957cc18c965486afb38d1164cce2a8.css" type="text/css">
+<script src="/apps/atvi/activision-blizzard/ab-touchui/components/content/who-we-are/wwa-franchises-component/clientlibs.d41d8cd98f00b204e9800998ecf8427e.js"></script>
+
+
+
+
+
+
+
+
+
+
+<section class="wwa-franchises-container ">
+  <div class="header-container content-container">
+    <h1 class="header">
+      <span class="head"><p>Our</p>
+<p>Legendary</p>
+<p>Franchises</p>
+</span>
+    </h1>
+  </div>
+  <div class="description-container content-container">
+    <div class="sub-headline">
+      <p>Iconic titles from our iconic studios.</p>
+
+      <a href="/games" alt="" class="links atvi-cta-item">Learn More</a>
+    </div>
+    <div class="description games-container">
+      <a href="https://worldofwarcraft.com/" target="_blank" class="game callout-container wow" style="background: url(/content/dam/atvi/activisionblizzard/ab-touchui/who-we-are/d20200806-005_AB_Site_Logo_Resize_01_Desktop_WoW.jpg) center center no-repeat;">
+        <span class="callout">World of Warcraft</span>
+      </a>
+      <a href="https://www.callofduty.com/" target="_blank" class="game callout-container cod" style="background: url(/content/dam/atvi/activisionblizzard/ab-touchui/who-we-are/d20200806-005_AB_Site_Logo_Resize_01B_Desktop_COD.jpg) center center no-repeat;">
+        <span class="callout">Call of Duty</span>
+      </a>
+      <a href="https://us.diablo3.com/" target="_blank" class="game callout-container diablo" style="background: url(/content/dam/atvi/activisionblizzard/ab-touchui/who-we-are/d20200806-005_AB_Site_Logo_Resize_01_Desktop_Diablo.jpg) center center no-repeat;">
+        <span class="callout">Diablo</span>
+      </a>
+      <a href="https://king.com/game/candycrush" target="_blank" class="game callout-container candy" style="background: url(/content/dam/atvi/activisionblizzard/ab-touchui/who-we-are/d20200806-005_AB_Site_Logo_Resize_01_Desktop_CandyCrush.jpg) center center no-repeat;">
+        <span class="callout">Candy Crush</span>
+      </a>
+      <a href="https://playhearthstone.com/" target="_blank" class="game callout-container hearth" style="background: url(/content/dam/atvi/activisionblizzard/ab-touchui/who-we-are/d20200806-005_AB_Site_Logo_Resize_01_Desktop_Hearthstone.jpg) center center no-repeat;">
+        <span class="callout">Hearthstone</span>
+      </a>
+      <a href="https://playoverwatch.com/" target="_blank" class="game callout-container overwatch" style="background: url(/content/dam/atvi/activisionblizzard/ab-touchui/who-we-are/d20200806-005_AB_Site_Logo_Resize_01_Desktop_Overwatch.jpg) center center no-repeat;">
+        <span class="callout">Overwatch</span>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+		</div>
+	
+</div>
+<div class="atvi-experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+
+    
+    
+		<div id="careers" class=" atvi-module-container" data-analytics-container="careers">
+			
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="right-img-half aem-GridColumn aem-GridColumn--default--12">
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/content/common/right-img-half/clientlibs.d721317d1da726d0185e300c69727e89.css" type="text/css">
+
+
+
+
+
+
+
+
+
+
+<section class="right-half-img-container home-careers">
+  <div class="content-container">
+    <div class="text-container">
+      <div class="bg-container mobile" style="background-image: url(/content/dam/atvi/activisionblizzard/ab-touchui/home/AB-homepage-videogame-bg.jpg);"></div>
+      <div class="description-container">
+        <h1 class="header"><p><b>Careers</b></p>
+</h1>
+        <div class="description">
+          <p>Activision Blizzard not only creates fun, we know how to have it—a lot of it. We are a community of people who work hard and play hard, and our camaraderie is fueled by our passion for gameplay. We know it takes heroes to make heroes, so if you're ready for a new cape, we invite you to apply to join our team.</p>
+
+        </div>
+        <a class="links atvi-cta-item" href="https://careers.activisionblizzard.com/">Work With Us</a>
+      </div>
+    </div>
+    <div class="bg-container desktop" style="background-image: url(/content/dam/atvi/activisionblizzard/ab-touchui/home/AB-homepage-videogame-bg.jpg);"></div>
+  </div>
+</section>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+		</div>
+	
+</div>
+<div class="atvi-experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+
+    
+    
+		<div id="atvi_experiencefragm_1924929854" class=" atvi-module-container" data-analytics-container="investors">
+			
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="home-investors aem-GridColumn aem-GridColumn--default--12">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  <section class="home-investors-container">
+    <h1 class="header content-container">
+        <span class="head">Activision Blizzard</span>
+    </h1>
+    <div class="content-container">
+      <div class="description-container mobile">
+        <div class="description"><p><b>INVESTOR RELATIONS</b></p>
+<p>Activision Blizzard, Inc. (NASDAQ: ATVI) is a member of the Fortune 500 and S&amp;P 500. As one of the world’s most successful standalone interactive entertainment and gaming corporations, we delight hundreds of millions of monthly active users. We are headquartered in Santa Monica, California, and have nearly fifty operations around the world. </p>
+</div>
+        <a class="links" href="https://investor.activision.com/">Learn More</a>
+      </div>
+      <ul class="list-container">
+        <li>
+            <span class="list-img list-img-1"><img src="/content/dam/atvi/activisionblizzard/ab-touchui/common/1.png" alt="number 1"/></span><a class="atvi-cta-item" href="https://investor.activision.com/#ir-reports-filings"><p>Reports &amp; Filings</p></a>
+        </li>
+        <li><span class="list-img list-img-2"><img src="/content/dam/atvi/activisionblizzard/ab-touchui/common/2.png" alt="number 2"/></span><a class="atvi-cta-item" href="https://investor.activision.com/#ir-content"><p>Stock Performance</p></a></li>
+        <li><span class="list-img list-img-3"><img src="/content/dam/atvi/activisionblizzard/ab-touchui/common/3.png" alt="number 3"/></span><a class="atvi-cta-item" href="https://investor.activision.com/#ir-events-presentations"><p>Events &amp; Presentations</p></a></li>
+        <li><span class="list-img list-img-4"><img src="/content/dam/atvi/activisionblizzard/ab-touchui/common/4.png" alt="number 4"/></span><a class="atvi-cta-item" href="https://investor.activision.com/#ir-corporate-governance"><p>Corporate Governance</p></a></li>
+      </ul>
+      <div class="description-container desktop">
+        <div class="description"><p><b>INVESTOR RELATIONS</b></p>
+<p>Activision Blizzard, Inc. (NASDAQ: ATVI) is a member of the Fortune 500 and S&amp;P 500. As one of the world’s most successful standalone interactive entertainment and gaming corporations, we delight hundreds of millions of monthly active users. We are headquartered in Santa Monica, California, and have nearly fifty operations around the world. </p>
+</div>
+        <a class="links" href="https://investor.activision.com/">Learn More</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+		</div>
+	
+</div>
+
+    
+</div>
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+<section class="experience-fragment-container ">
+	
+
+	
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="ab-footer aem-GridColumn aem-GridColumn--default--12">
+    
+<link rel="stylesheet" href="/apps/atvi/activision-blizzard/ab-touchui/components/structure/ab-footer/clientlibs.eaacc413aa8e873c6f2ac8cb23bc4e02.css" type="text/css">
+<script src="/apps/atvi/activision-blizzard/ab-touchui/components/structure/ab-footer/clientlibs.2ddf2186f470a1df842727e46347088e.js"></script>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+  <footer class="footer-container">
+
+    
+
+      <div class="top-container content-container desktop">
+
+        <div class="top-left">
+          <div class="logos">
+            <a href="/home"><img src="/content/dam/atvi/activisionblizzard/ab/common/logos/activision-blizzard-logo-white.png" alt="Activision Blizzard"/></a>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <ul class="top-links">
+          		<li>
+                <a class="no-dash-links" href="https://careers.activisionblizzard.com" target="_blank">Careers</a>
+              </li>
+            
+              <li>
+                <a class="no-dash-links" href="https://www.activisionblizzard.com/legal">Legal</a>
+              </li>
+            
+              <li>
+                <a class="no-dash-links" href="https://www.activisionblizzard.com/legal/terms-of-use">Terms of Use</a>
+              </li>
+            
+              <li>
+                <a class="no-dash-links" href="https://www.activisionblizzard.com/legal/privacy-policy">Privacy Policy</a>
+              </li>
+            
+
+            
+            <li><button id="ot-sdk-btn" class="ot-sdk-show-settings">Cookie Settings</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="middle-container content-container">
+
+        <div class="side-bar-container">Scroll Up</div>
+
+        <div class="logos mobile">
+          <a href="/home"><img src="/content/dam/atvi/activisionblizzard/ab/common/logos/activision-blizzard-logo-white.png" alt="Activision Blizzard"/></a>
+        </div>
+
+        <div class="middle-left-container">
+          <div class="middle-left-visit">
+            <h3>Visit Us</h3>
+            <ul>
+              <li><a class="no-dash-links" href="https://www.activision.com" target="_blank">activision.com</a></li>
+              <li><a class="no-dash-links" href="https://www.blizzard.com" target="_blank">blizzard.com</a></li>
+              <li><a class="no-dash-links" href="https://www.king.com/" target="_blank">king.com</a></li>
+            </ul>
+          </div>
+          <div class="middle-left-contact">
+            <h3>Get In Touch With Our Team!</h3>
+            <ul>
+              <li><a class="no-dash-links" href="http://www.activisionblizzard.com/contact-us">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="middle-right-container">
+          <h3>Connect with Us</h3>
+          <ul class="socials-list">
+            <li><a class="socials li" aria-label="LinkedIn" target="_blank" href="https://www.linkedin.com/company/activision-blizzard"></a>
+            </li>
+            <li><a class="socials tw" aria-label="Twitter" target="_blank" href="https://twitter.com/atvi_ab?lang=en"></a>
+            </li>
+            <li><a class="socials fb" aria-label="Facebook" target="_blank" href="https://www.facebook.com/activision.blizzard.atvi/"></a>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="top-links mobile">
+            <li>
+              <a class="no-dash-links" href="https://careers.activisionblizzard.com" target="_blank">Careers</a>
+            </li>
+          
+            <li>
+              <a class="no-dash-links" href="https://www.activisionblizzard.com/legal">Legal</a>
+            </li>
+          
+            <li>
+              <a class="no-dash-links" href="https://www.activisionblizzard.com/legal/terms-of-use">Terms of Use</a>
+            </li>
+          
+            <li>
+              <a class="no-dash-links" href="https://www.activisionblizzard.com/legal/privacy-policy">Privacy Policy</a>
+            </li>
+          
+
+          
+          <li><button id="ot-sdk-btn-mobile" class="ot-sdk-show-settings">Cookie Settings</button></li>
+        </ul>
+      </div>
+
+      
+
+      <div class="bottom-container">
+		<div class="content-container">
+            <div class="bottom-left-container">
+              <p>All trademarks referenced herein are the properties of their respective owners. © 2022 Blizzard Entertainment, Inc. © 2022 Activision Publishing, Inc. © 2022 King.com Ltd. All rights reserved.</p>
+
+            </div>
+            <div class="bottom-right-container">
+              <ul class="ratings-icon-container">
+                
+                <li>
+                  <a class="footer-ratings-icon esrb-bbb" style="background-image: url();" title="BBB" alt="BBB"></a>
+                </li>
+                <li>
+                  <a class="footer-ratings-icon esrb-cert" href="http://www.esrb.org/confirm/activision-confirmation.jsp" style="background-image: url(/content/dam/atvi/global/ratings/esrb/privacy_certified_global_color.png);" title="ESRB Cert" alt="ESRB Cert"></a>
+                </li>
+                <li>
+                  <a class="footer-ratings-icon esrb-rating" href="https://esrb.org" style="background-image: url(/content/dam/atvi/global/ratings/esrb/rp-m-esrb-logo-2.png);" title="ESRB Rating" alt="ESRB Rating"></a>
+                </li>
+              </ul>
+            </div>
+    	</div>
+      </div>
+  </footer>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</section>
+</div>
+
+    
+</div>
+</div>
+
+    
+
+        
         
     
     
@@ -12,48 +1326,48 @@ Result Size: 945 x 864
             <button aria-label="Close" class="close-modal">&times;</div>
         </div>
     </div>
-​
-​
+
+
     
-        <div class="atvi-privacy-policy-module">
+		<div class="atvi-privacy-policy-module">
             <div class="inner">
-                <div class="content-left">Privacy Policy Update </div>
-                <div class="content-right">We’ve updated our Privacy Policy. You can view the revised policy <a href="https://www.activision.com/legal/privacy-policy" target="_blank">here</a>. By continuing to use Activision’s websites, products or services, you acknowledge this revised Privacy Policy.</div>
+    			<div class="content-left">Privacy Policy Update </div>
+    			<div class="content-right">We’ve updated our Privacy Policy. You can view the revised policy <a href="https://www.activision.com/legal/privacy-policy" target="_blank">here</a>. By continuing to use Activision’s websites, products or services, you acknowledge this revised Privacy Policy.</div>
                 <button aria-label="Close" class="close-modal">&times;</div>
             </div>
-        </div>
+		</div>
     
-​
-    
-    
-    
-​
-    
-​
+
     
     
-​
+    
+
+    
+
     
     
-​
+
     
     
-​
+
+    
+    
+
         
-​
-​
-​
-​
-        
-        
-​
+
+
+
+
+		
+		
+
         <script type="text/javascript">
             if (typeof _satellite !== 'undefined') {
-                 _satellite.pageBottom(); // Execute if _satellite exists
-            }
-        </script>
-​
+       			 _satellite.pageBottom(); // Execute if _satellite exists
+      		}
+    	</script>
+
     </body>
-​
-​
+
+
 </html>
